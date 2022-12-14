@@ -7,6 +7,12 @@
   <title>HTML Finder</title>
 </head>
 <body>
+  <table>
+    <tr>
+      <td>DY:</td>
+      <td id="dy-value"></td>
+    </tr>
+  </table>
 <script>
 document.addEventListener("DOMContentLoaded",()=>{
 
@@ -21,9 +27,10 @@ document.addEventListener("DOMContentLoaded",()=>{
   let html = fetch(url)
   .then((response) => response.text())
   .then((html) => {
-    const bdy = new DOMParser().parseFromString(html, 'text/html');;
-    console.log(bdy)
-    
+    const bdy = new DOMParser().parseFromString(html, 'text/html');
+    const info = bdy.getElementById('main-indicators-carousel');
+    const div = parseFloat(info.getElementsByClassName('carousel-cell')[1].getElementsByTagName('span')[1].innerText.trim().split(' ')[1].replace(',','.'));
+    document.getElementById('dy-value').innerHTML = div    
   })
   
 })
