@@ -9,26 +9,26 @@
 <body>
 <script>
 document.addEventListener("DOMContentLoaded",()=>{
+
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
   const ticker = urlParams.get('ticker')
-  const data = urlParams.get('data')
-  const baseUrl = "https://www.fundsexplorer.com.br/funds/"
-  const options = {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'text/html',
-    }};
-  let html = fetch(baseUrl+ticker, options)
-  .then((response) => response.json())
-  .then((data) => {
-    document.body.innerHTML = JSON.stringify(data,null,2)
-  })
-  .catch((err) => {
-    document.body.innerHTML = err
+  const data = urlParams.get('data');
+  const cors = "https://cors-anywhere.herokuapp.com/";
+  const service = "https://www.fundsexplorer.com.br/funds/";
+  const url = cors+service+ticker;
+  console.log(url)
+  let html = fetch(url)
+  .then((response) => response.text())
+  .then((html) => {
+    const bdy = new DOMParser().parseFromString(html, 'text/html');;
+    console.log(bdy)
+    
   })
   
 })
+
+
 </script>
 </body>
 </html>
