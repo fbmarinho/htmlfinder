@@ -6,36 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>HTML Finder</title>
 </head>
+<script src="./script.js" type="text/javascript"></script>
 <body>
-  <table>
-    <tr>
-      <td>DY:</td>
-      <td id="dy-value"></td>
-    </tr>
-  </table>
-<script>
-document.addEventListener("DOMContentLoaded",()=>{
-
-  const queryString = window.location.search;
-  const urlParams = new URLSearchParams(queryString);
-  const ticker = urlParams.get('ticker')
-  const data = urlParams.get('data');
-  const cors = "https://cors-anywhere.herokuapp.com/";
-  const service = "https://www.fundsexplorer.com.br/funds/";
-  const url = cors+service+ticker;
-  console.log(url)
-  let html = fetch(url)
-  .then((response) => response.text())
-  .then((html) => {
-    const bdy = new DOMParser().parseFromString(html, 'text/html');
-    const info = bdy.getElementById('main-indicators-carousel');
-    const div = parseFloat(info.getElementsByClassName('carousel-cell')[1].getElementsByTagName('span')[1].innerText.trim().split(' ')[1].replace(',','.'));
-    document.getElementById('dy-value').innerHTML = div    
-  })
-  
-})
-
-
-</script>
+<table id="dy"></table>
 </body>
 </html>
