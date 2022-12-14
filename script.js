@@ -15,7 +15,7 @@ const getData = async () => {
     
     let response = await fetch(url);
     let html = await response.text();
-    console.log(html);
+
     const bdy = new DOMParser().parseFromString(html, 'text/html');
     const info = bdy.getElementById('main-indicators-carousel');
     const dividend = parseFloat(info.getElementsByClassName('carousel-cell')[1].getElementsByTagName('span')[1].innerText.trim().split(' ')[1].replace(',','.'));
